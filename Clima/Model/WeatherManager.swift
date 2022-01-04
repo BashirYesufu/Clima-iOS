@@ -19,19 +19,18 @@ struct WeatherManager {
     func performRequest(urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url, completionHandler: handleCompletion(data: response: error:))
+            let task = session.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    return
+                }
+                
+                if let safeData = data {
+                    let dataString = String(data: safeData, encoding: .utf8)
+                    print(dataString)
+                }
+            }
             task.resume()
         }
     }
-    
-    func handleCompletion(data: Data?, response: URLResponse?, error: Error?) {
-        if error != nil {
-            return
-        }
-        
-        if let safeData = data {
-            let dataString = String(data: safeData, encoding: .utf8)
-            print(dataString)
-        }
-    }
+   
 }
