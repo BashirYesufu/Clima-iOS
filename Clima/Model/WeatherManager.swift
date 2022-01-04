@@ -37,8 +37,13 @@ struct WeatherManager {
         do {
            let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
             print(decodedData.list[0].main.temp)
+            print(decodedData.list[0].weather[0].id)
         } catch {
             
         }
+    }
+    
+    func getConditionName(id: Int) -> String {
+        
     }
 }
