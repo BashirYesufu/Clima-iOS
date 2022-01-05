@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
     
@@ -17,10 +18,12 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     
     var weatherManager = WeatherManager()
+    var locationManager =  CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestWhenInUseAuthorization()
         weatherManager.delegate = self
         searchTextField.delegate = self
     }
